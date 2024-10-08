@@ -1,8 +1,8 @@
-import functions
-from enumFunctions import Functions
-import GA
-from SA import simulated_annealing  
-from GWO import GWO
+import src.functions as functions
+from src.enumFunctions import Functions
+import src.GA as GA
+from src.SA import simulated_annealing  
+from src.GWO import GWO
 obj_func = functions.selectFunction(Functions.ackley)
 
 def gwo():
