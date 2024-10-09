@@ -138,8 +138,8 @@ def GWO(objf, lb, ub, dim, SearchAgents_no, Max_iter, repeat, folder, value_a):
                     "Fitness Result": [str(Alpha_score)],
             }
             df = pd.DataFrame(data)
+            # File naming -> population + iteration + value_a + repeat.csv
             st = str(SearchAgents_no) + "_" + str(Max_iter) + "_" + str(value_a) + "-" + str(repeat) +'_.csv'
-            #file_path = str(SearchAgents_no) + "_", str(Max_iter) + "_" + "test.csv"
             subfolder = 'output/' + folder
             file_path = os.path.join(subfolder, st)
             os.makedirs(subfolder, exist_ok=True)
