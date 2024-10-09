@@ -12,7 +12,7 @@ import time
 import os
 
 
-def GWO(objf, lb, ub, dim, SearchAgents_no, Max_iter, repeat, folder):
+def GWO(objf, lb, ub, dim, SearchAgents_no, Max_iter, repeat, folder, value_a):
 
     # Max_iter=1000
     # lb=-100
@@ -81,7 +81,7 @@ def GWO(objf, lb, ub, dim, SearchAgents_no, Max_iter, repeat, folder):
                 Delta_score = fitness  # Update delta
                 Delta_pos = Positions[i, :].copy()
 
-        a = 2 - l * ((2) / Max_iter)
+        a = value_a - l * ((2) / Max_iter)
         # a decreases linearly fron 2 to 0
 
         # Update the Position of search agents including omegas
@@ -138,7 +138,7 @@ def GWO(objf, lb, ub, dim, SearchAgents_no, Max_iter, repeat, folder):
                     "Fitness Result": [str(Alpha_score)],
             }
             df = pd.DataFrame(data)
-            st = str(SearchAgents_no) + "_" + str(Max_iter) + "_" + str(repeat) +'_.csv'
+            st = str(SearchAgents_no) + "_" + str(Max_iter) + "_" + str(value_a) + "-" + str(repeat) +'_.csv'
             #file_path = str(SearchAgents_no) + "_", str(Max_iter) + "_" + "test.csv"
             subfolder = 'output/' + folder
             file_path = os.path.join(subfolder, st)
