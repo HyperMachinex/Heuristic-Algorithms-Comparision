@@ -1,10 +1,13 @@
 import multiprocessing
 import time
+import colorama
+from colorama import Fore, Style
 
 class CLI_spinner:
-    def __init__(self, message = "", speed = 0.1) -> None:
+    def __init__(self, message = "", message_end = "", speed = 0.1) -> None:
         self.message = message
         self.speed = speed
+        self.message_end = message_end
 
         self.process = multiprocessing.Process(
             target = self.spin,
@@ -17,7 +20,7 @@ class CLI_spinner:
         spinner = ['-', '\\', '|', '/']
         n = 0
         while True:
-            print(f'\r{self.message}{spinner[n]}', end = "")
+            print(Fore.YELLOW + f'\r{self.message} [{spinner[n]}]', end = "")
             n += 1
             if n >= len(spinner):
                 n = 0
@@ -32,4 +35,5 @@ class CLI_spinner:
             print("Warning: CLI Spinner is not running.")
         else:
             self.process.terminate()
-            print()
+            print(Fore.GREEN + f'\r{self.message_end}', end = "")
+            print(Style.RESET_ALL)

@@ -22,7 +22,7 @@ def gwo(pop_size, iter, rep, folder, a):
     GWO(obj_func, lower_bound, upper_bound, dimension, SearchAgents_no = pop_size, Max_iter = iter, repeat = rep, folder = folder, value_a = a)
 
 def main():
-    spinner = CLI_spinner('GWO-sphere tests are running.', 0.1)
+    spinner = CLI_spinner('GWO-sphere tests are running.', 'GWO-sphere tests are completed.', 0.1)
     spinner.start()
     do_test()
     spinner.stop()
