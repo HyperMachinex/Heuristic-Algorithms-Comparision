@@ -1,10 +1,10 @@
 from GWO import GWO
 import functions as functions
 obj_func = functions.selectFunction(0)
+
 lower_bound = -32.768
 upper_bound = 32.768
 dimension = 30
-
 population = [100, 250, 500, 1000]
 iteration = [100, 250, 500, 1000]
 
