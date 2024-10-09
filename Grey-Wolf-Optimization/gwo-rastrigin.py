@@ -1,6 +1,7 @@
 from GWO import GWO
 import functions as functions
 obj_func = functions.selectFunction(4)
+from cli_spinner import CLI_spinner
 
 lower_bound = -5.12
 upper_bound = 5.12
@@ -14,14 +15,17 @@ def do_test():
         for i in population:
             for k in iteration:
                 for l in a_values:
-                    print(f"Grey Wolf Algorithm - Population: {i} - Iteration: {k} - Value-a: {l}, Test Number: {j+1}")
+                    #print(f"Grey Wolf Algorithm - Population: {i} - Iteration: {k} - Value-a: {l}, Test Number: {j+1}")
                     gwo(i, k, j+1, 'rastrigin', l)
 
 def gwo(pop_size, iter, rep, folder, a):
     GWO(obj_func, lower_bound, upper_bound, dimension, SearchAgents_no = pop_size, Max_iter = iter, repeat = rep, folder = folder, value_a = a)
 
 def main():
+    spinner = CLI_spinner('GWO-rastrigin tests are running.', 0.1)
+    spinner.start()
     do_test()
+    spinner.stop()
 
 
 if __name__ == "__main__":

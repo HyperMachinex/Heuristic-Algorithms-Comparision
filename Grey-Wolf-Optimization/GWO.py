@@ -10,6 +10,7 @@ import math
 from solution import solution
 import time
 import os
+from cli_spinner import CLI_spinner
 
 
 def GWO(objf, lb, ub, dim, SearchAgents_no, Max_iter, repeat, folder, value_a):
@@ -46,7 +47,7 @@ def GWO(objf, lb, ub, dim, SearchAgents_no, Max_iter, repeat, folder, value_a):
     s = solution()
 
     # Loop counter
-    print('GWO is optimizing  "' + objf.__name__ + '"')
+    #print('GWO is optimizing  "' + objf.__name__ + '"')
 
     timerStart = time.time()
     s.startTime = time.strftime("%Y-%m-%d-%H-%M-%S")
@@ -144,9 +145,10 @@ def GWO(objf, lb, ub, dim, SearchAgents_no, Max_iter, repeat, folder, value_a):
             file_path = os.path.join(subfolder, st)
             os.makedirs(subfolder, exist_ok=True)
             df.to_csv(file_path , index = False, mode = 'a', header= False )
-            print(
-                ["At iteration " + str(l) + " the best fitness is " + str(Alpha_score)]
-            )
+            
+            #print(
+            #    ["At iteration " + str(l) + " the best fitness is " + str(Alpha_score)]
+            #)
             
 
     timerEnd = time.time()
