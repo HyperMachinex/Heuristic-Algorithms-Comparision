@@ -9,9 +9,11 @@ import numpy
 import math
 from solution import solution
 import time
+import os
+from cli_spinner import CLI_spinner
 
 
-def GWO(objf, lb, ub, dim, SearchAgents_no, Max_iter):
+def GWO(objf, lb, ub, dim, SearchAgents_no, Max_iter, repeat, folder, value_a):
 
     # Max_iter=1000
     # lb=-100
@@ -45,7 +47,7 @@ def GWO(objf, lb, ub, dim, SearchAgents_no, Max_iter):
     s = solution()
 
     # Loop counter
-    print('GWO is optimizing  "' + objf.__name__ + '"')
+    #print('GWO is optimizing  "' + objf.__name__ + '"')
 
     timerStart = time.time()
     s.startTime = time.strftime("%Y-%m-%d-%H-%M-%S")
@@ -80,7 +82,7 @@ def GWO(objf, lb, ub, dim, SearchAgents_no, Max_iter):
                 Delta_score = fitness  # Update delta
                 Delta_pos = Positions[i, :].copy()
 
-        a = 2 - l * ((2) / Max_iter)
+        a = value_a - l * ((2) / Max_iter)
         # a decreases linearly fron 2 to 0
 
         # Update the Position of search agents including omegas
@@ -131,17 +133,23 @@ def GWO(objf, lb, ub, dim, SearchAgents_no, Max_iter):
         Convergence_curve[l] = Alpha_score
 
         if l % 1 == 0:
-            
-            print(
-                ["At iteration " + str(l) + " the best fitness is " + str(Alpha_score)]
-            )
             data = {
                     "Population": [SearchAgents_no],
+                    "Iteration" : [str(l)],
                     "Fitness Result": [str(Alpha_score)],
             }
             df = pd.DataFrame(data)
-            file_path = "test.csv"
-            df.to_csv(file_path, index = True)
+            # File naming -> population + iteration + value_a + repeat.csv
+            st = str(SearchAgents_no) + "_" + str(Max_iter) + "_" + str(value_a) + "-" + str(repeat) +'_.csv'
+            subfolder = 'output/' + folder
+            file_path = os.path.join(subfolder, st)
+            os.makedirs(subfolder, exist_ok=True)
+            df.to_csv(file_path , index = False, mode = 'a', header= False )
+            
+            #print(
+            #    ["At iteration " + str(l) + " the best fitness is " + str(Alpha_score)]
+            #)
+            
 
     timerEnd = time.time()
     s.endTime = time.strftime("%Y-%m-%d-%H-%M-%S")
