@@ -132,25 +132,24 @@ def GWO(objf, lb, ub, dim, SearchAgents_no, Max_iter, repeat, folder, value_a):
 
         Convergence_curve[l] = Alpha_score
 
-        if l % 1 == 0:
-            data = {
-                    "Population": [SearchAgents_no],
-                    "Iteration" : [str(l)],
-                    "Fitness Result": [str(Alpha_score)],
-            }
-            df = pd.DataFrame(data)
-            # File naming -> population + iteration + value_a + repeat.csv
-            st = str(SearchAgents_no) + "_" + str(Max_iter) + "_" + str(value_a) + "-" + str(repeat) +'_.csv'
-            subfolder = 'output/' + folder
-            file_path = os.path.join(subfolder, st)
-            os.makedirs(subfolder, exist_ok=True)
-            df.to_csv(file_path , index = False, mode = 'a', header= False )
-            
-            #print(
-            #    ["At iteration " + str(l) + " the best fitness is " + str(Alpha_score)]
-            #)
+        #if l % 1 == 0:    
+        #   print(["At iteration " + str(l) + " the best fitness is " + str(Alpha_score)])
             
 
+
+
+    data = {
+                    "Fitness Result": [str(Alpha_score)],
+                    "Repeat": [str(repeat)],
+            }
+    df = pd.DataFrame(data)
+    # File naming -> population + iteration + value_a + repeat.csv
+    st = str(SearchAgents_no) + "_" + str(Max_iter) + "_" + str(value_a) + '_.csv'
+    subfolder = 'output/' + folder
+    file_path = os.path.join(subfolder, st)
+    os.makedirs(subfolder, exist_ok=True)
+    df.to_csv(file_path , index = False, mode = 'a', header= False )
+            
     timerEnd = time.time()
     s.endTime = time.strftime("%Y-%m-%d-%H-%M-%S")
     s.executionTime = timerEnd - timerStart
