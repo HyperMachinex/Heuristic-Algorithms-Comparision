@@ -134,9 +134,6 @@ def GWO(objf, lb, ub, dim, SearchAgents_no, Max_iter, repeat, folder, value_a):
 
         #if l % 1 == 0:    
         #   print(["At iteration " + str(l) + " the best fitness is " + str(Alpha_score)])
-            
-
-
 
     data = {
                     "Fitness Result": [str(Alpha_score)],
