@@ -6,8 +6,8 @@ from cli_spinner import CLI_spinner
 lower_bound = -500
 upper_bound = 500
 dimension = 30
-population = [100]
-iteration = [100]
+population = [100, 250, 500, 1000]
+iteration = [100, 250, 500, 1000]
 
 def do_test():    
         for i in population:
