@@ -9,9 +9,10 @@ import random
 import numpy
 from solution import solution
 import time
+import pandas as pd
+import os
 
-
-def PSO(objf, lb, ub, dim, PopSize, iters):
+def PSO(objf, lb, ub, dim, PopSize, iters, folder, repeat):
 
     # PSO parameters
 
@@ -46,7 +47,6 @@ def PSO(objf, lb, ub, dim, PopSize, iters):
     convergence_curve = numpy.zeros(iters)
 
     ############################################
-    print('PSO is optimizing  "' + objf.__name__ + '"')
 
     timerStart = time.time()
     s.startTime = time.strftime("%Y-%m-%d-%H-%M-%S")
@@ -89,7 +89,7 @@ def PSO(objf, lb, ub, dim, PopSize, iters):
                 pos[i, j] = pos[i, j] + vel[i, j]
 
         convergence_curve[l] = gBestScore
-
+        """
         if l % 1 == 0:
             print(
                 [
@@ -99,6 +99,20 @@ def PSO(objf, lb, ub, dim, PopSize, iters):
                     + str(gBestScore)
                 ]
             )
+        """
+
+    data = {
+                    "Fitness Result": [str(gBestScore)],
+                    "Repeat": [str(repeat)],
+            }
+    df = pd.DataFrame(data)
+    # File naming -> population + iteration + value_a + repeat.csv
+    st = str(PopSize) + "_" + str(iters) +'_.csv'
+    subfolder = 'output/' + folder
+    file_path = os.path.join(subfolder, st)
+    os.makedirs(subfolder, exist_ok=True)
+    df.to_csv(file_path , index = False, mode = 'a', header= False )
+
     timerEnd = time.time()
     s.best = gBestScore
     s.endTime = time.strftime("%Y-%m-%d-%H-%M-%S")
