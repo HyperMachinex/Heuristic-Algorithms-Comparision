@@ -131,17 +131,9 @@ def GWO(objf, lb, ub, dim, SearchAgents_no, Max_iter):
         Convergence_curve[l] = Alpha_score
 
         if l % 1 == 0:
-            
             print(
                 ["At iteration " + str(l) + " the best fitness is " + str(Alpha_score)]
             )
-            data = {
-                    "Population": [SearchAgents_no],
-                    "Fitness Result": [str(Alpha_score)],
-            }
-            df = pd.DataFrame(data)
-            file_path = "test.csv"
-            df.to_csv(file_path, index = True)
 
     timerEnd = time.time()
     s.endTime = time.strftime("%Y-%m-%d-%H-%M-%S")
