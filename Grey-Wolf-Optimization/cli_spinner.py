@@ -35,5 +35,6 @@ class CLI_spinner:
             print("Warning: CLI Spinner is not running.")
         else:
             self.process.terminate()
+            print('\r' + ' ' * (len(self.message) + 10), end='')
             print(Fore.GREEN + f'\r{self.message_end}', end = "")
             print(Style.RESET_ALL)
